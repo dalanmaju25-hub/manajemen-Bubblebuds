@@ -1,0 +1,5 @@
+{
+  "name": "BubbleBuds Manajemen",
+  "description": "",
+  "requestFramePermissions": ["geolocation"]
+}

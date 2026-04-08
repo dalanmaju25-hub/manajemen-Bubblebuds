@@ -1,0 +1,105 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System user (Admin, Manager, Cashier, Therapist)",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["Super Admin", "Manajer", "Kasir", "Terapis"] },
+        "status": { "type": "string", "enum": ["Aktif", "Nonaktif"] },
+        "avatar": { "type": "string", "format": "uri" },
+        "lastLogin": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "email", "role", "status", "createdAt"]
+    },
+    "Member": {
+      "title": "Member",
+      "description": "Customer/Member of the spa",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "babyName": { "type": "string" },
+        "tier": { "type": "string", "enum": ["Bronze", "Silver", "Gold"] },
+        "points": { "type": "number" },
+        "lastVisit": { "type": "string", "format": "date-time" },
+        "avatar": { "type": "string", "format": "uri" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "tier", "points", "createdAt"]
+    },
+    "InventoryItem": {
+      "title": "Inventory Item",
+      "description": "Spa products, tools, and retail items",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string", "enum": ["Produk Retail", "Alat", "Bahan"] },
+        "stock": { "type": "number" },
+        "minStock": { "type": "number" },
+        "price": { "type": "number" },
+        "image": { "type": "string", "format": "uri" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "category", "stock", "minStock", "price", "createdAt"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Spa session booking",
+      "type": "object",
+      "properties": {
+        "memberId": { "type": "string" },
+        "memberName": { "type": "string" },
+        "service": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["Menunggu Konfirmasi", "Terkonfirmasi", "Berlangsung", "Selesai", "Dibatalkan"] },
+        "therapistId": { "type": "string" },
+        "therapistName": { "type": "string" },
+        "room": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["memberName", "service", "date", "status", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "POS Transaction",
+      "type": "object",
+      "properties": {
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "tax": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "cashierId": { "type": "string" },
+        "cashierName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["items", "subtotal", "tax", "total", "paymentMethod", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Collection of system users"
+    },
+    "/members/{memberId}": {
+      "schema": { "$ref": "#/entities/Member" },
+      "description": "Collection of spa members"
+    },
+    "/inventory/{itemId}": {
+      "schema": { "$ref": "#/entities/InventoryItem" },
+      "description": "Collection of inventory items"
+    },
+    "/bookings/{bookingId}": {
+      "schema": { "$ref": "#/entities/Booking" },
+      "description": "Collection of bookings"
+    },
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Collection of POS transactions"
+    }
+  }
+}

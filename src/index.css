@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #056380;
+  --color-primary-container: #8fd5f7;
+  --color-on-primary: #e5f5ff;
+  --color-surface: #f0f7ff;
+  --color-surface-container-low: #e5f2ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-highest: #bbe2ff;
+  --color-on-surface: #00324a;
+  --color-on-surface-variant: #37607a;
+  --color-outline: #547b97;
+  --color-outline-variant: #8ab2cf;
+
+  --font-headline: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Be Vietnam Pro", sans-serif;
+  --font-label: "Be Vietnam Pro", sans-serif;
+}
